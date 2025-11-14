@@ -1,0 +1,44 @@
+pipeline {
+    agent any  // Se ejecuta en cualquier agente disponible
+
+    stages {
+        stage('Preparación 🛠️') {
+            steps {
+                echo '🔧 Preparando el entorno...'
+            }
+        }
+
+        stage('Construcción 🏗️') {
+            steps {
+                echo '🏗️ Construyendo la aplicación...'
+                // sh 'mvn clean install' o 'npm install'
+            }
+        }
+
+        stage('Pruebas 🧪') {
+            steps {
+                echo '🧪 Ejecutando pruebas...'
+                // sh 'mvn test' o 'npm test'
+            }
+        }
+
+        stage('Despliegue 🚀') {
+            steps {
+                echo '🚀 Desplegando la aplicación...'
+                // sh 'scp target/app.jar usuario@servidor:/ruta/'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo '✅ Pipeline finalizado.'
+        }
+        success {
+            echo '🎉 ¡Pipeline ejecutado correctamente!'
+        }
+        failure {
+            echo '❌ Algo salió mal en el pipeline.'
+        }
+    }
+}
